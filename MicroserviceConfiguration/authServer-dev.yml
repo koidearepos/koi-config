@@ -17,12 +17,6 @@ spring:
     username: ${dataBaseUsername}
     url: ${dataBaseURL}
     password: ${dataBasePassword}
-  flyway:
-    locations: classpath:/db/migrations
-    baselineOnMigrate: true
-    check-location: true
-    schemas: public
-    enabled: true
   jpa:
     database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
     hibernate:
