@@ -19,6 +19,8 @@ spring:
     password: ${dataBasePassword}
   flyway:
     locations: classpath:/db/migrations
+    baselineOnMigrate: true
+    validateOnMigrate: false
   jpa:
     database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
     hibernate:
