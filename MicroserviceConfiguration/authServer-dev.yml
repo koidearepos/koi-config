@@ -26,11 +26,11 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
-flyway:
-  url: ${dataBaseURL}
-  user: ${dataBaseUsername}
-  password: ${dataBasePassword}
-  locations: filesystem:src/main/resources/sql/migrations
+  flyway:
+    url: ${dataBaseURL}
+    user: ${dataBaseUsername}
+    password: ${dataBasePassword}
+    locations: filesystem:src/main/resources/sql/migrations
 eureka:
   client:
     registerWithEureka: true
