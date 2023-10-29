@@ -17,6 +17,8 @@ spring:
     username: ${dataBaseUsername}
     url: ${dataBaseURL}
     password: ${dataBasePassword}
+  flyway:
+    locations: classpath:/db/migrations
   jpa:
     database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
     hibernate:
@@ -26,11 +28,6 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
-  flyway:
-    url: ${dataBaseURL}
-    user: ${dataBaseUsername}
-    password: ${dataBasePassword}
-    locations: filesystem:src/main/resources/sql/migrations
 eureka:
   client:
     registerWithEureka: true
