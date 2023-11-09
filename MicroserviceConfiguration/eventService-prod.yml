@@ -1,4 +1,4 @@
-dataBaseURL: jdbc:postgresql://localhost:5432/koi
+dataBaseURL: jdbc:postgresql://localhost:5431/koi
 dataBaseUsername: postgres
 dataBasePassword: Ga.4567.
 logbackURL: http://localhost:8000/native/native/main/LogConfiguration/EventServiceLogback.xml
@@ -9,7 +9,7 @@ eurakaIP: localhost:8001/eureka/
 event:
   lastUpdateDateline: 5
   eventSaveMinStar: 2.5
-  
+
 server:
   port: 8601
 spring:
@@ -20,9 +20,11 @@ spring:
     url: ${dataBaseURL}
     password: ${dataBasePassword}
   jpa:
-    database: postgresql
+    database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
     hibernate:
-      ddl-auto: none
+      dialect: org.hibernate.spatial.dialect.postgis.PostgisDialect
+      database: postgresql
+      ddl-auto: update
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
