@@ -8,6 +8,18 @@ server:
 spring:
   application:
     name: EMAIL-SERVICE
+  mail:
+    host: smtp-mail.outlook.com
+    port: 587
+    username:
+    password:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+  thymeleaf:
+    prefix: classpath:/templates/
 eureka:
   client:
     registerWithEureka: true
