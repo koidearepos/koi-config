@@ -9,6 +9,8 @@ spring:
   application:
     name: EMAIL-SERVICE
   mail:
+    host: smtp.gmail.com
+    port: 465
     username: test.koi.project@gmail.com
     password:  "dgrk fpec iwsz qzld"
     properties:
