@@ -4,7 +4,7 @@ eurakaPassword: 1234
 eurakaIP: localhost:8001/eureka/
 
 server:
-  port: 8010
+  port: 8005
 spring:
   application:
     name: EMAIL-SERVICE
@@ -12,7 +12,7 @@ spring:
     host: smtp.gmail.com
     port: 465
     username: test.koi.project@gmail.com
-    password:  "dgrk fpec iwsz qzld"
+    password:  dgrk fpec iwsz qzld
     properties:
       mail:
         smtp:
