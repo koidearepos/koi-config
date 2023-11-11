@@ -3,11 +3,33 @@ eurakaUsername: grkem
 eurakaPassword: 1234
 eurakaIP: localhost:8001/eureka/
 
+
 server:
-  port: 8010
+  port: 8005
+  error:
+    include-message: always
+    include-binding-errors: always
 spring:
   application:
     name: EMAIL-SERVICE
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    username: test.koi.project@gmail.com
+    password:  dgrk fpec iwsz qzld
+    properties:
+      mail:
+        smtp:
+          host: smtp.gmail.com
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+          auth: true
+          port: 465
+          starttls:
+            enable: true
+  thymeleaf:
+    prefix: classpath:/templates/
 eureka:
   client:
     registerWithEureka: true

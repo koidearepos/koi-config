@@ -9,6 +9,9 @@ eurakaIP: localhost:8001/eureka/
 
 server:
   port: 8602
+  error:
+    include-message: always
+    include-binding-errors: always
 spring:
   application:
     name: COMMENT-SERVICE

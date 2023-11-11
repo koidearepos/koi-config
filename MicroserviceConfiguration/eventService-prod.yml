@@ -12,6 +12,9 @@ event:
 
 server:
   port: 8601
+  error:
+    include-message: always
+    include-binding-errors: always
 spring:
   application:
     name: EVENT-SERVICE

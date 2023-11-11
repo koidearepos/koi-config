@@ -11,6 +11,9 @@ userDetail:
 
 server:
   port: 8600
+  error:
+    include-message: always
+    include-binding-errors: always
 spring:
   application:
     name: USER-DETAIL
