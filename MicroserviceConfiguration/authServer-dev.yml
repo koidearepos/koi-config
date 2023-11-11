@@ -6,6 +6,7 @@ eurakaUsername: grkem
 eurakaPassword: 1234
 eurakaIP: localhost:8001/eureka/
 resetPasswordTokenExpriationMinute: 2
+activeAccountTokenExpriationMinute: 60
 resetPasswordTokenLength: 8
 activeAccountTokenLength: 8
 
