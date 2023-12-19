@@ -5,6 +5,7 @@ logbackURL: http://localhost:8000/native/native/main/LogConfiguration/Participan
 eurakaUsername: grkem
 eurakaPassword: 1234
 eurakaIP: localhost:8001/eureka/
+joinEventTokenLength: 8
 
 
 server:
