@@ -25,7 +25,7 @@ spring:
       database: postgresql
       ddl-auto: update
   rabbitmq:
-    host: http://192.168.1.2
+    host: localhost
     port: 15672
     username: guest
     password: guest
