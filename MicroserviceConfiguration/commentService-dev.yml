@@ -37,7 +37,7 @@ sample:
   rabbitmq:
     exchange: default
     updateUserDetailQueue: updateUserDetailQueue
-    routingKey: updateUserDetailRoute
+    updateUserDetailRoute: updateUserDetailRoute
 eureka:
   client:
     registerWithEureka: true
