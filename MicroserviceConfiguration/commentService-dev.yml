@@ -36,7 +36,7 @@ spring:
 sample:
   rabbitmq:
     exchange: default
-    queue: updateUserDetailQueue
+    updateUserDetailQueue: updateUserDetailQueue
     routingKey: updateUserDetailRoute
 eureka:
   client:
