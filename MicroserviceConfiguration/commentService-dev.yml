@@ -12,6 +12,11 @@ server:
     include-message: always
     include-binding-errors: always
 spring:
+  rabbitmq:
+    user: guest
+    password: guest
+    host: rabbitmq
+    port: 15672
   application:
     name: COMMENT-SERVICE
   datasource:
@@ -24,11 +29,7 @@ spring:
       dialect: org.hibernate.spatial.dialect.postgis.PostgisDialect
       database: postgresql
       ddl-auto: update
-  rabbitmq:
-    host: 127.0.0.1
-    port: 15672
-    username: guest
-    password: guest
+  
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
