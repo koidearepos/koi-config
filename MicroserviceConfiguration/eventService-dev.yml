@@ -16,6 +16,11 @@ server:
     include-message: always
     include-binding-errors: always
 spring:
+  rabbitmq:
+    user: guest
+    password: guest
+    host: localhost
+    port: 5672
   application:
     name: EVENT-SERVICE
   datasource:
@@ -31,6 +36,11 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
+sample:
+  rabbitmq:
+    exchange: default
+    updateUserRemainingQueue: updateUserRemainingQueue
+    updateUserRemainingRoute: updateUserRemainingRoute
 eureka:
   client:
     registerWithEureka: true
