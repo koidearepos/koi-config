@@ -6,13 +6,17 @@ eurakaUsername: grkem
 eurakaPassword: 1234
 eurakaIP: localhost:8001/eureka/
 
-
 server:
   port: 8602
   error:
     include-message: always
     include-binding-errors: always
 spring:
+  rabbitmq:
+    user: guest
+    password: guest
+    host: localhost
+    port: 5672
   application:
     name: COMMENT-SERVICE
   datasource:
@@ -25,9 +29,23 @@ spring:
       dialect: org.hibernate.spatial.dialect.postgis.PostgisDialect
       database: postgresql
       ddl-auto: update
+  
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
+sample:
+  rabbitmq:
+    exchange: default
+    updateUserDetailQueue: updateUserDetailQueue
+    updateUserDetailQueueRoute: updateUserDetailQueueRoute
+    emailWithHtmlQueue: emailWithHtmlQueue
+    emailWithHtmlQueueRoute: emailWithHtmlQueueRoute
+    emailQueue: emailQueue
+    emailQueueRoute: emailQueueRoute
+    multipleEmailWithHtmlQueue: multipleEmailWithHtmlQueue
+    multipleEmailWithHtmlQueueRoute: multipleEmailWithHtmlQueueRoute
+    multipleEmailQueue: multipleEmailQueue
+    multipleEmailQueueRoute: multipleEmailQueueRoute
 eureka:
   client:
     registerWithEureka: true
