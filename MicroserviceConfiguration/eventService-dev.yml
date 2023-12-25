@@ -40,7 +40,7 @@ sample:
   rabbitmq:
     exchange: default
     updateUserRemainingQueue: updateUserRemainingQueue
-    updateUserRemainingRoute: updateUserRemainingRoute
+    updateUserRemainingQueueRoute: updateUserRemainingQueueRoute
     emailWithHtmlQueue: emailWithHtmlQueue
     emailWithHtmlQueueRoute: emailWithHtmlQueueRoute
     emailQueue: emailQueue
