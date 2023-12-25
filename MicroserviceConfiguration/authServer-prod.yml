@@ -16,6 +16,11 @@ server:
     include-message: always
     include-binding-errors: always
 spring:
+  rabbitmq:
+    user: guest
+    password: guest
+    host: localhost
+    port: 5672
   application:
     name: AUTH-SERVER
   datasource:
@@ -31,6 +36,17 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
+sample:
+  rabbitmq:
+    exchange: default
+    emailWithHtmlQueue: emailWithHtmlQueue
+    emailWithHtmlQueueRoute: emailWithHtmlQueueRoute
+    emailQueue: emailQueue
+    emailQueueRoute: emailQueueRoute
+    multipleEmailWithHtmlQueue: multipleEmailWithHtmlQueue
+    multipleEmailWithHtmlQueueRoute: multipleEmailWithHtmlQueueRoute
+    multipleEmailQueue: multipleEmailQueue
+    multipleEmailQueueRoute: multipleEmailQueueRoute
 eureka:
   client:
     registerWithEureka: true
