@@ -37,7 +37,15 @@ sample:
   rabbitmq:
     exchange: default
     updateUserDetailQueue: updateUserDetailQueue
-    updateUserDetailRoute: updateUserDetailRoute
+    updateUserDetailQueueRoute: updateUserDetailQueueRoute
+    emailWithHtmlQueue: emailWithHtmlQueue
+    emailWithHtmlQueueRoute: emailWithHtmlQueueRoute
+    emailQueue: emailQueue
+    emailQueueRoute: emailQueueRoute
+    multipleEmailWithHtmlQueue: multipleEmailWithHtmlQueue
+    multipleEmailWithHtmlQueueRoute: multipleEmailWithHtmlQueueRoute
+    multipleEmailQueue: multipleEmailQueue
+    multipleEmailQueueRoute: multipleEmailQueueRoute
 eureka:
   client:
     registerWithEureka: true
