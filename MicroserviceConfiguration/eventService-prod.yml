@@ -9,13 +9,18 @@ eurakaIP: localhost:8001/eureka/
 event:
   lastUpdateDateline: 5
   eventSaveMinStar: 2.5
-
+  
 server:
   port: 8601
   error:
     include-message: always
     include-binding-errors: always
 spring:
+  rabbitmq:
+    user: guest
+    password: guest
+    host: localhost
+    port: 5672
   application:
     name: EVENT-SERVICE
   datasource:
@@ -31,6 +36,19 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
+sample:
+  rabbitmq:
+    exchange: default
+    updateUserRemainingQueue: updateUserRemainingQueue
+    updateUserRemainingQueueRoute: updateUserRemainingQueueRoute
+    emailWithHtmlQueue: emailWithHtmlQueue
+    emailWithHtmlQueueRoute: emailWithHtmlQueueRoute
+    emailQueue: emailQueue
+    emailQueueRoute: emailQueueRoute
+    multipleEmailWithHtmlQueue: multipleEmailWithHtmlQueue
+    multipleEmailWithHtmlQueueRoute: multipleEmailWithHtmlQueueRoute
+    multipleEmailQueue: multipleEmailQueue
+    multipleEmailQueueRoute: multipleEmailQueueRoute
 eureka:
   client:
     registerWithEureka: true
