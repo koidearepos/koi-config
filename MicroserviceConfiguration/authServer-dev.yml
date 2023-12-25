@@ -40,10 +40,13 @@ sample:
   rabbitmq:
     exchange: default
     emailWithHtmlQueue: emailWithHtmlQueue
+    emailWithHtmlQueueRoute: emailWithHtmlQueueRoute
     emailQueue: emailQueue
+    emailQueueRoute: emailQueueRoute
     multipleEmailWithHtmlQueue: multipleEmailWithHtmlQueue
+    multipleEmailWithHtmlQueueRoute: multipleEmailWithHtmlQueueRoute
     multipleEmailQueue: multipleEmailQueue
-    authServerRabbitRoute: authServerRabbitRoute
+    multipleEmailQueueRoute: multipleEmailQueueRoute
 eureka:
   client:
     registerWithEureka: true
