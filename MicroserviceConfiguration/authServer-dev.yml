@@ -36,6 +36,14 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
+sample:
+  rabbitmq:
+    exchange: default
+    emailWithHtmlQueue: emailWithHtmlQueue
+    emailQueue: emailQueue
+    multipleEmailWithHtmlQueue: multipleEmailWithHtmlQueue
+    multipleEmailQueue: multipleEmailQueue
+    authServerRabbitRoute: authServerRabbitRoute
 eureka:
   client:
     registerWithEureka: true
