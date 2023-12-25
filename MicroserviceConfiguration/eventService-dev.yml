@@ -41,6 +41,14 @@ sample:
     exchange: default
     updateUserRemainingQueue: updateUserRemainingQueue
     updateUserRemainingRoute: updateUserRemainingRoute
+    emailWithHtmlQueue: emailWithHtmlQueue
+    emailWithHtmlQueueRoute: emailWithHtmlQueueRoute
+    emailQueue: emailQueue
+    emailQueueRoute: emailQueueRoute
+    multipleEmailWithHtmlQueue: multipleEmailWithHtmlQueue
+    multipleEmailWithHtmlQueueRoute: multipleEmailWithHtmlQueueRoute
+    multipleEmailQueue: multipleEmailQueue
+    multipleEmailQueueRoute: multipleEmailQueueRoute
 eureka:
   client:
     registerWithEureka: true
