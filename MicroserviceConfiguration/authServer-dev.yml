@@ -9,22 +9,6 @@ resetPasswordTokenExpriationMinute: 2
 activeAccountTokenExpriationMinute: 60
 resetPasswordTokenLength: 8
 activeAccountTokenLength: 8
-log4j:
-    appender:
-        hb: org.apache.log4j.ConsoleAppender
-        hb.Threshold: TRACE
-        hb.layout: org.apache.log4j.PatternLayout
-        hb.layout.ConversionPattern: HibernateLog --> %d{HH:mm:ss} %-5p %c - %m%n
-    logger:
-        org:
-            hibernate: INFO, hb
-            hibernate.SQL: DEBUG
-            hibernate.cache: info
-            hibernate.hql: debug
-            hibernate.hql.ast.AST: info
-            hibernate.jdbc: debug
-            hibernate.tool.hbm2ddl: warn
-            hibernate.type: TRACE
 
 server:
   port: 8004
@@ -44,7 +28,6 @@ spring:
     url: ${dataBaseURL}
     password: ${dataBasePassword}
   jpa:
-    show-sql: true
     database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
     hibernate:
       dialect: org.hibernate.spatial.dialect.postgis.PostgisDialect
