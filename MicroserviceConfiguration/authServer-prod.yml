@@ -11,7 +11,7 @@ resetPasswordTokenLength: 8
 activeAccountTokenLength: 8
 
 server:
-  port: 8004
+  port: 8024
   error:
     include-message: always
     include-binding-errors: always
