@@ -92,7 +92,7 @@ resilience4j:
   timelimiter:
     configs:
       defaultTimelimiter:
-        timeoutDuration: 2s
+        timeoutDuration: 20s
     instances:
       fallbackAuth:
         baseConfig: defaultTimelimiter
@@ -109,7 +109,6 @@ resilience4j:
       defaultRatelimiter:
         limitForPeriod: 2
         limitRefreshPeriod: 10s
-        timeoutDuration: 1s
     instances:
       fallbackAuth:
         baseConfig: defaultRatelimiter
