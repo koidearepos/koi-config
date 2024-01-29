@@ -111,7 +111,8 @@ resilience4j:
         limitRefreshPeriod: 10s
     instances:
       fallbackAuth:
-        baseConfig: defaultRatelimiter
+        limitForPeriod: 2
+        limitRefreshPeriod: 10s
       fallbackUser:
         baseConfig: defaultRatelimiter
       fallbackEvent:
