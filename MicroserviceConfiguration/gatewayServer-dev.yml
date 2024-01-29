@@ -108,7 +108,10 @@ resilience4j:
     configs:
       defaultRatelimiter:
         limitForPeriod: 2
-        limitRefreshPeriod: 10s
+        limitRefreshPeriod: 15s
+        timeoutDuration: 5s
+        registerHealthIndicator: true
+        subscribeForEvents: true
     instances:
       fallbackAuth:
         baseConfig: defaultRatelimiter
