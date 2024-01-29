@@ -104,6 +104,24 @@ resilience4j:
         baseConfig: defaultTimelimiter
       fallbackParticipant:
         baseConfig: defaultTimelimiter
+  ratelimiter:
+    configs:
+      defaultRatelimiter:
+        limitForPeriod: 1
+        limitRefreshPeriod: 10s
+        timeoutDuration: 5s
+    instances:
+      fallbackAuth:
+        baseConfig: defaultRatelimiter
+      fallbackUser:
+        baseConfig: defaultRatelimiter
+      fallbackEvent:
+        baseConfig: defaultRatelimiter
+      fallbackComment:
+        baseConfig: defaultRatelimiter
+      fallbackParticipant:
+        baseConfig: defaultRatelimiter
+    
 eureka:
   client:
     registerWithEureka: true
