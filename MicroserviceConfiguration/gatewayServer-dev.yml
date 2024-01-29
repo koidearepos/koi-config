@@ -67,7 +67,7 @@ spring:
 resilience4j:
   circuitbreaker:
     configs:
-      default:
+      defaultCircuitbreaker:
         slidingWindowType: COUNT_BASED #Kayıt altına alınan data kıstası. Saniye olarakta belirlenebilmektedir.
         slidingWindowSize: 100 #Son x datanın dikkate alınmasını sağlar.
         minimumNumberOfCalls: 50 #Asgari kayıt sayısını belirler. Bu kayıt sayısından sonra algoritmalar çalışacaktır.
@@ -80,27 +80,30 @@ resilience4j:
         registerHealthIndicator: true
     instances:
       fallbackAuth:
-        baseConfig: default
+        baseConfig: defaultCircuitbreaker
       fallbackUser:
-        baseConfig: default
+        baseConfig: defaultCircuitbreaker
       fallbackEvent:
-        baseConfig: default
+        baseConfig: defaultCircuitbreaker
       fallbackComment:
-        baseConfig: default
+        baseConfig: defaultCircuitbreaker
       fallbackParticipant:
-        baseConfig: default
+        baseConfig: defaultCircuitbreaker
   timelimiter:
+    configs:
+      defaultTimelimiter:
+        timeoutDuration: 20s #Request kaç saniye sonra time-out olacak bilgisi girilir. İlgili request time-out'tan sonra fallback'e düşecektir.
     instances:
       fallbackAuth:
-        timeoutDuration: 20s #Request kaç saniye sonra time-out olacak bilgisi girilir. İlgili request time-out'tan sonra fallback'e düşecektir.
+        baseConfig: defaultTimelimiter
       fallbackUser:
-        timeoutDuration: 20s
+        baseConfig: defaultTimelimiter
       fallbackEvent:
-        timeoutDuration: 20s
+        baseConfig: defaultTimelimiter
       fallbackComment:
-        timeoutDuration: 20s
+        baseConfig: defaultTimelimiter
       fallbackParticipant:
-        timeoutDuration: 20s
+        baseConfig: defaultTimelimiter
 eureka:
   client:
     registerWithEureka: true
