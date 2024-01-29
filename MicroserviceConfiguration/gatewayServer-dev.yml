@@ -71,10 +71,7 @@ resilience4j:
         slidingWindowType: COUNT_BASED #Kayıt altına alınan data kıstası. Saniye olarakta belirlenebilmektedir.
         slidingWindowSize: 10 #Son x datanın dikkate alınmasını sağlar.
         minimumNumberOfCalls: 12 #Asgari kayıt sayısını belirler. Bu kayıt sayısından sonra algoritmalar çalışacaktır.
-        permittedNumberOfCallsInHalfOpenState: 2 #Sigora yarı açıkken yapılacak max kayıt sayısı.
-        automaticTransitionFromOpenToHalfOpenEnabled: true #Sigortanın açık konumdan yarı-açık konuma gelmesini üsrecinin atomatize edilmesi sağlar.
         failureRateThreshold: 50 #% cinsinden ne kadar bir fail oranı olursa sigorta açık konuma gelecek bilgisi girilir.
-        waitDurationInOpenState: 10s #Açık olan devre saniye sonra yarı açık hal gelecektir.
       fallbackUser:
         slidingWindowType: COUNT_BASED #Kayıt altına alınan data kıstası. Saniye olarakta belirlenebilmektedir.
         slidingWindowSize: 100 #Son x datanın dikkate alınmasını sağlar.
