@@ -66,62 +66,29 @@ spring:
                 fallbackUri: forward:/fallbackParticipantService
 resilience4j:
   circuitbreaker:
+    configs:
+      default:
+        slidingWindowType: COUNT_BASED #Kayıt altına alınan data kıstası. Saniye olarakta belirlenebilmektedir.
+        slidingWindowSize: 100 #Son x datanın dikkate alınmasını sağlar.
+        minimumNumberOfCalls: 50 #Asgari kayıt sayısını belirler. Bu kayıt sayısından sonra algoritmalar çalışacaktır.
+        permittedNumberOfCallsInHalfOpenState: 20 #Sigora yarı açıkken yapılacak max kayıt sayısı.
+        automaticTransitionFromOpenToHalfOpenEnabled: true #Sigortanın açık konumdan yarı-açık konuma gelmesini üsrecinin atomatize edilmesi sağlar.
+        failureRateThreshold: 50 #% cinsinden ne kadar bir fail oranı olursa sigorta açık konuma gelecek bilgisi girilir.
+        waitDurationInOpenState: 10s #Açık olan devre saniye sonra yarı açık hal gelecektir.
+        slowCallDurationThreshold: 10s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
+        slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
+        registerHealthIndicator: true
     instances:
       fallbackAuth:
-        slidingWindowType: COUNT_BASED #Kayıt altına alınan data kıstası. Saniye olarakta belirlenebilmektedir.
-        slidingWindowSize: 100 #Son x datanın dikkate alınmasını sağlar.
-        minimumNumberOfCalls: 50 #Asgari kayıt sayısını belirler. Bu kayıt sayısından sonra algoritmalar çalışacaktır.
-        permittedNumberOfCallsInHalfOpenState: 20 #Sigora yarı açıkken yapılacak max kayıt sayısı.
-        automaticTransitionFromOpenToHalfOpenEnabled: true #Sigortanın açık konumdan yarı-açık konuma gelmesini üsrecinin atomatize edilmesi sağlar.
-        failureRateThreshold: 50 #% cinsinden ne kadar bir fail oranı olursa sigorta açık konuma gelecek bilgisi girilir.
-        waitDurationInOpenState: 10s #Açık olan devre saniye sonra yarı açık hal gelecektir.
-        slowCallDurationThreshold: 10s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
-        slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
-        registerHealthIndicator: true
+        baseConfig: default
       fallbackUser:
-        slidingWindowType: COUNT_BASED #Kayıt altına alınan data kıstası. Saniye olarakta belirlenebilmektedir.
-        slidingWindowSize: 100 #Son x datanın dikkate alınmasını sağlar.
-        minimumNumberOfCalls: 50 #Asgari kayıt sayısını belirler. Bu kayıt sayısından sonra algoritmalar çalışacaktır.
-        permittedNumberOfCallsInHalfOpenState: 20 #Sigora yarı açıkken yapılacak max kayıt sayısı.
-        automaticTransitionFromOpenToHalfOpenEnabled: true #Sigortanın açık konumdan yarı-açık konuma gelmesini üsrecinin atomatize edilmesi sağlar.
-        failureRateThreshold: 50 #% cinsinden ne kadar bir fail oranı olursa sigorta açık konuma gelecek bilgisi girilir.
-        waitDurationInOpenState: 10s #Açık olan devre saniye sonra yarı açık hal gelecektir.
-        slowCallDurationThreshold: 10s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
-        slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
-        registerHealthIndicator: true
+        baseConfig: default
       fallbackEvent:
-        slidingWindowType: COUNT_BASED #Kayıt altına alınan data kıstası. Saniye olarakta belirlenebilmektedir.
-        slidingWindowSize: 100 #Son x datanın dikkate alınmasını sağlar.
-        minimumNumberOfCalls: 50 #Asgari kayıt sayısını belirler. Bu kayıt sayısından sonra algoritmalar çalışacaktır.
-        permittedNumberOfCallsInHalfOpenState: 20 #Sigora yarı açıkken yapılacak max kayıt sayısı.
-        automaticTransitionFromOpenToHalfOpenEnabled: true #Sigortanın açık konumdan yarı-açık konuma gelmesini üsrecinin atomatize edilmesi sağlar.
-        failureRateThreshold: 50 #% cinsinden ne kadar bir fail oranı olursa sigorta açık konuma gelecek bilgisi girilir.
-        waitDurationInOpenState: 10s #Açık olan devre saniye sonra yarı açık hal gelecektir.
-        slowCallDurationThreshold: 10s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
-        slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
-        registerHealthIndicator: true
+        baseConfig: default
       fallbackComment:
-        slidingWindowType: COUNT_BASED #Kayıt altına alınan data kıstası. Saniye olarakta belirlenebilmektedir.
-        slidingWindowSize: 100 #Son x datanın dikkate alınmasını sağlar.
-        minimumNumberOfCalls: 50 #Asgari kayıt sayısını belirler. Bu kayıt sayısından sonra algoritmalar çalışacaktır.
-        permittedNumberOfCallsInHalfOpenState: 20 #Sigora yarı açıkken yapılacak max kayıt sayısı.
-        automaticTransitionFromOpenToHalfOpenEnabled: true #Sigortanın açık konumdan yarı-açık konuma gelmesini üsrecinin atomatize edilmesi sağlar.
-        failureRateThreshold: 50 #% cinsinden ne kadar bir fail oranı olursa sigorta açık konuma gelecek bilgisi girilir.
-        waitDurationInOpenState: 10s #Açık olan devre saniye sonra yarı açık hal gelecektir.
-        slowCallDurationThreshold: 10s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
-        slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
-        registerHealthIndicator: true
+        baseConfig: default
       fallbackParticipant:
-        slidingWindowType: COUNT_BASED #Kayıt altına alınan data kıstası. Saniye olarakta belirlenebilmektedir.
-        slidingWindowSize: 100 #Son x datanın dikkate alınmasını sağlar.
-        minimumNumberOfCalls: 50 #Asgari kayıt sayısını belirler. Bu kayıt sayısından sonra algoritmalar çalışacaktır.
-        permittedNumberOfCallsInHalfOpenState: 20 #Sigora yarı açıkken yapılacak max kayıt sayısı.
-        automaticTransitionFromOpenToHalfOpenEnabled: true #Sigortanın açık konumdan yarı-açık konuma gelmesini üsrecinin atomatize edilmesi sağlar.
-        failureRateThreshold: 50 #% cinsinden ne kadar bir fail oranı olursa sigorta açık konuma gelecek bilgisi girilir.
-        waitDurationInOpenState: 10s #Açık olan devre saniye sonra yarı açık hal gelecektir.
-        slowCallDurationThreshold: 10s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
-        slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
-        registerHealthIndicator: true
+        baseConfig: default
   timelimiter:
     instances:
       fallbackAuth:
