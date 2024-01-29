@@ -24,6 +24,10 @@ spring:
               args:
                 name: fallbackAuth
                 fallbackUri: forward:/fallbackAuthServer
+            - name: RequestRateLimiter
+              args:
+                name: fallbackAuth
+                fallbackUri: forward:/fallbackAuthServer
         - id: userDetailService
           uri: lb://USER-DETAIL
           predicates:
