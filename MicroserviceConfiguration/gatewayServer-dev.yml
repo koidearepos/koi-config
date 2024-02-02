@@ -79,7 +79,7 @@ resilience4j:
         slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
         registerHealthIndicator: true
         recordExceptions:
-          - java.lang.RuntimeException
+          - org.springframework.web.server.ResponseStatusException
     instances:
       fallbackAuth:
         baseConfig: defaultCircuitbreaker
