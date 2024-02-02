@@ -126,3 +126,6 @@ management:
         include: "*"
 logging:
   config: ${logbackURL}
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    io.github.resilience4j: DEBUG
