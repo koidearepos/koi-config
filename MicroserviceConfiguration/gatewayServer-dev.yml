@@ -75,16 +75,30 @@ resilience4j:
   circuitbreaker:
     instances:
       fallbackAuth:
-        
+        baseConfig: defaultCircuitbreaker
       fallbackUser:
-
+        baseConfig: defaultCircuitbreaker
       fallbackEvent:
-     
+        baseConfig: defaultCircuitbreaker
       fallbackComment:
-     
+        baseConfig: defaultCircuitbreaker
       fallbackParticipant:
-e 
-    
+        baseConfig: defaultCircuitbreaker
+  timelimiter:
+    configs:
+      defaultTimelimiter:
+        timeoutDuration: 20s
+    instances:
+      fallbackAuth:
+        baseConfig: defaultTimelimiter
+      fallbackUser:
+        baseConfig: defaultTimelimiter
+      fallbackEvent:
+        baseConfig: defaultTimelimiter
+      fallbackComment:
+        baseConfig: defaultTimelimiter
+      fallbackParticipant:
+        baseConfig: defaultTimelimiter
 eureka:
   client:
     registerWithEureka: true
