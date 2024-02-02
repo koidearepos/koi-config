@@ -67,17 +67,18 @@ resilience4j:
   circuitbreaker:
     configs:
       defaultCircuitbreaker:
-        failureRateThreshold: 51
-        waitDurationInOpenState: 5s
-        permittedNumberOfCallsInHalfOpenState: 3
-        minimumNumberOfCalls: 5
-        slidingWindowType: COUNT_BASED
-        slidingWindowSize: 10
-        eventConsumerBufferSize: 10
+        slidingWindowSize: 10                     #unit request
+        permittedNumberOfCallsInHalfOpenState: 5  #unit request
+        failureRateThreshold: 50                  #percent
+        waitDurationInOpenState: 10000            #10 seconds
         registerHealthIndicator: true
     instances:
       fallbackAuth:
-        baseConfig: defaultCircuitbreaker
+        slidingWindowSize: 10                     #unit request
+        permittedNumberOfCallsInHalfOpenState: 5  #unit request
+        failureRateThreshold: 50                  #percent
+        waitDurationInOpenState: 10000            #10 seconds
+        registerHealthIndicator: true
       fallbackUser:
         baseConfig: defaultCircuitbreaker
       fallbackEvent:
