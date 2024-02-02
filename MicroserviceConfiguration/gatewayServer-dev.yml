@@ -68,11 +68,14 @@ resilience4j:
   circuitbreaker:
     configs:
       defaultCircuitbreaker:
-        slidingWindowType: COUNT_BASED #Kayıt altına alınan data kıstası. Saniye olarakta belirlenebilmektedir.
-        slidingWindowSize: 12 #Son x datanın dikkate alınmasını sağlar.
-        permittedNumberOfCallsInHalfOpenState: 20 #Sigora yarı açıkken yapılacak max kayıt sayısı.
-        failureRateThreshold: 50 #% cinsinden ne kadar bir fail oranı olursa sigorta açık konuma gelecek bilgisi girilir.
-        waitDurationInOpenState: 10s #Açık olan devre saniye sonra yarı açık hal gelecektir.
+        failureRateThreshold: 50
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
+        minimumNumberOfCalls: 5
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10
+        eventConsumerBufferSize: 10
+        registerHealthIndicator: true
     instances:
       fallbackAuth:
         baseConfig: defaultCircuitbreaker
