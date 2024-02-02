@@ -64,7 +64,7 @@ spring:
                 name: fallbackParticipant
                 fallbackUri: forward:/fallbackParticipantService
 resilience4j:
- circuitbreaker:
+  circuitbreaker:
     configs:
       defaultCircuitbreaker:
         slidingWindowType: COUNT_BASED #Kayıt altına alınan data kıstası. Saniye olarakta belirlenebilmektedir.
@@ -77,7 +77,6 @@ resilience4j:
         slowCallDurationThreshold: 10s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
         slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
         registerHealthIndicator: true
-  circuitbreaker:
     instances:
       fallbackAuth:
         baseConfig: defaultCircuitbreaker
