@@ -68,7 +68,7 @@ resilience4j:
   circuitbreaker:
     configs:
       defaultCircuitbreaker:
-        failureRateThreshold: 50
+        failureRateThreshold: 51
         waitDurationInOpenState: 5s
         permittedNumberOfCallsInHalfOpenState: 3
         minimumNumberOfCalls: 5
