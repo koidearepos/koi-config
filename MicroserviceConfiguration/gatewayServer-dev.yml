@@ -83,8 +83,13 @@ resilience4j:
         permittedNumberOfCallsInHalfOpenState: 5  #unit request
         failureRateThreshold: 50                  #percent
         waitDurationInOpenState: 10000            #10 seconds
-        registerHealthIndicator: true      fallbackComment:
-        baseConfig: defaultCircuitbreaker
+        registerHealthIndicator: true      
+      fallbackComment:
+        slidingWindowSize: 10                     #unit request
+        permittedNumberOfCallsInHalfOpenState: 5  #unit request
+        failureRateThreshold: 50                  #percent
+        waitDurationInOpenState: 10000            #10 seconds
+        registerHealthIndicator: true      
       fallbackParticipant:
         slidingWindowSize: 10                     #unit request
         permittedNumberOfCallsInHalfOpenState: 5  #unit request
