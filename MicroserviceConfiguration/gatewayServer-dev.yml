@@ -65,6 +65,7 @@ spring:
                 fallbackUri: forward:/fallbackParticipantService
 resilience4j:
   circuitbreaker:
+    circuitBreakerAspectOrder: 1
     configs:
       defaultCircuitbreaker:
         slidingWindowSize: 10                     #unit request
@@ -88,6 +89,7 @@ resilience4j:
       fallbackParticipant:
         baseConfig: defaultCircuitbreaker
   timelimiter:
+    timelimiterAspectOrder: 2
     configs:
       defaultTimelimiter:
         timeoutDuration: 20s
