@@ -75,7 +75,7 @@ resilience4j:
         automaticTransitionFromOpenToHalfOpenEnabled: true #Sigortanın açık konumdan yarı-açık konuma gelmesini üsrecinin atomatize edilmesi sağlar.
         failureRateThreshold: 50 #% cinsinden ne kadar bir fail oranı olursa sigorta açık konuma gelecek bilgisi girilir.
         waitDurationInOpenState: 10s #Açık olan devre saniye sonra yarı açık hal gelecektir.
-        slowCallDurationThreshold: 10s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
+        slowCallDurationThreshold: 1s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
         slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
         registerHealthIndicator: true
     instances:
