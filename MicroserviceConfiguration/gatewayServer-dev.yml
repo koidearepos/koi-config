@@ -65,14 +65,6 @@ spring:
                 fallbackUri: forward:/fallbackParticipantService
 resilience4j:
   circuitbreaker:
-    circuitBreakerAspectOrder: 1
-    configs:
-      defaultCircuitbreaker:
-        slidingWindowSize: 10                     #unit request
-        permittedNumberOfCallsInHalfOpenState: 5  #unit request
-        failureRateThreshold: 50                  #percent
-        waitDurationInOpenState: 10000            #10 seconds
-        registerHealthIndicator: true
     instances:
       fallbackAuth:
         slidingWindowSize: 10                     #unit request
@@ -81,48 +73,24 @@ resilience4j:
         waitDurationInOpenState: 10000            #10 seconds
         registerHealthIndicator: true
       fallbackUser:
-        baseConfig: defaultCircuitbreaker
-      fallbackEvent:
-        baseConfig: defaultCircuitbreaker
-      fallbackComment:
-        baseConfig: defaultCircuitbreaker
-      fallbackParticipant:
-        baseConfig: defaultCircuitbreaker
-  timelimiter:
-    timelimiterAspectOrder: 2
-    configs:
-      defaultTimelimiter:
-        timeoutDuration: 20s
-    instances:
-      fallbackAuth:
-        baseConfig: defaultTimelimiter
-      fallbackUser:
-        baseConfig: defaultTimelimiter
-      fallbackEvent:
-        baseConfig: defaultTimelimiter
-      fallbackComment:
-        baseConfig: defaultTimelimiter
-      fallbackParticipant:
-        baseConfig: defaultTimelimiter
-  ratelimiter:
-    configs:
-      defaultRatelimiter:
-        limitForPeriod: 5
-        limitRefreshPeriod: 1s
-        timeoutDuration: 5s
+        slidingWindowSize: 10                     #unit request
+        permittedNumberOfCallsInHalfOpenState: 5  #unit request
+        failureRateThreshold: 50                  #percent
+        waitDurationInOpenState: 10000            #10 seconds
         registerHealthIndicator: true
-        subscribeForEvents: true
-    instances:
-      fallbackAuth:
-        baseConfig: defaultRatelimiter
-      fallbackUser:
-        baseConfig: defaultRatelimiter
       fallbackEvent:
-        baseConfig: defaultRatelimiter
-      fallbackComment:
-        baseConfig: defaultRatelimiter
+        slidingWindowSize: 10                     #unit request
+        permittedNumberOfCallsInHalfOpenState: 5  #unit request
+        failureRateThreshold: 50                  #percent
+        waitDurationInOpenState: 10000            #10 seconds
+        registerHealthIndicator: true      fallbackComment:
+        baseConfig: defaultCircuitbreaker
       fallbackParticipant:
-        baseConfig: defaultRatelimiter
+        slidingWindowSize: 10                     #unit request
+        permittedNumberOfCallsInHalfOpenState: 5  #unit request
+        failureRateThreshold: 50                  #percent
+        waitDurationInOpenState: 10000            #10 seconds
+        registerHealthIndicator: true 
     
 eureka:
   client:
