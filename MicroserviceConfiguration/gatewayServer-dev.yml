@@ -74,7 +74,7 @@ resilience4j:
         permittedNumberOfCallsInHalfOpenState: 2 #Sigora yarı açıkken yapılacak max kayıt sayısı.
         automaticTransitionFromOpenToHalfOpenEnabled: true #Sigortanın açık konumdan yarı-açık konuma gelmesini üsrecinin atomatize edilmesi sağlar.
         failureRateThreshold: 50 #% cinsinden ne kadar bir fail oranı olursa sigorta açık konuma gelecek bilgisi girilir.
-        waitDurationInOpenState: 10s #Açık olan devre saniye sonra yarı açık hal gelecektir.
+        waitDurationInOpenState: 60s #Açık olan devre saniye sonra yarı açık hal gelecektir.
         slowCallDurationThreshold: 30s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
         slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
         registerHealthIndicator: true
