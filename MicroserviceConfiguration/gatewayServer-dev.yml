@@ -78,6 +78,8 @@ resilience4j:
         slowCallDurationThreshold: 30s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
         slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
         registerHealthIndicator: true
+        recordExceptions:
+          - java.lang.RuntimeException
     instances:
       fallbackAuth:
         baseConfig: defaultCircuitbreaker
