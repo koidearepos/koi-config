@@ -19,6 +19,7 @@ spring:
           predicates:
             - Path=/auth/**
           filters:
+            - RewritePath=/(?<segment>.*), /$\{segment}
             - name: CircuitBreaker
               args:
                 name: fallbackAuth
