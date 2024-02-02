@@ -133,8 +133,14 @@ eureka:
       defaultZone: http://${eurakaUsername}:${eurakaPassword}@${eurakaIP}
     healthcheck:
       enabled: true
+      management:
 management:
   endpoints:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
     web:
       exposure:
         include: "*"
