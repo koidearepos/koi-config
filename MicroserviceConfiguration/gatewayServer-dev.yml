@@ -64,38 +64,26 @@ spring:
                 name: fallbackParticipant
                 fallbackUri: forward:/fallbackParticipantService
 resilience4j:
+ circuitbreaker:
+    configs:
+      defaultCircuitbreaker:
+        failureRateThreshold: 50
+        failureRateThreshold: 51
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
+        minimumNumberOfCalls: 5
   circuitbreaker:
     instances:
       fallbackAuth:
-        slidingWindowSize: 10                     #unit request
-        permittedNumberOfCallsInHalfOpenState: 5  #unit request
-        failureRateThreshold: 50                  #percent
-        waitDurationInOpenState: 10000            #10 seconds
-        registerHealthIndicator: true
+        
       fallbackUser:
-        slidingWindowSize: 10                     #unit request
-        permittedNumberOfCallsInHalfOpenState: 5  #unit request
-        failureRateThreshold: 50                  #percent
-        waitDurationInOpenState: 10000            #10 seconds
-        registerHealthIndicator: true
+
       fallbackEvent:
-        slidingWindowSize: 10                     #unit request
-        permittedNumberOfCallsInHalfOpenState: 5  #unit request
-        failureRateThreshold: 50                  #percent
-        waitDurationInOpenState: 10000            #10 seconds
-        registerHealthIndicator: true      
+     
       fallbackComment:
-        slidingWindowSize: 10                     #unit request
-        permittedNumberOfCallsInHalfOpenState: 5  #unit request
-        failureRateThreshold: 50                  #percent
-        waitDurationInOpenState: 10000            #10 seconds
-        registerHealthIndicator: true      
+     
       fallbackParticipant:
-        slidingWindowSize: 10                     #unit request
-        permittedNumberOfCallsInHalfOpenState: 5  #unit request
-        failureRateThreshold: 50                  #percent
-        waitDurationInOpenState: 10000            #10 seconds
-        registerHealthIndicator: true 
+e 
     
 eureka:
   client:
