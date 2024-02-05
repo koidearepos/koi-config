@@ -15,17 +15,17 @@ resilience4j.circuitbreaker:
       waitDurationInOpenState: 5s
       failureRateThreshold: 50
       eventConsumerBufferSize: 50
-    instances:
-      fallbackAuth:
-        baseConfig: default
-      fallbackUser:
-        baseConfig: default
-      fallbackEvent:
-        baseConfig: default
-      fallbackComment:
-        baseConfig: default
-      fallbackParticipant:
-        baseConfig: default
+  instances:
+    fallbackAuth:
+      baseConfig: default
+    fallbackUser:
+      baseConfig: default
+    fallbackEvent:
+      baseConfig: default
+    fallbackComment:
+      baseConfig: default
+    fallbackParticipant:
+      baseConfig: default
   timelimiter:
     configs:
       defaultTimelimiter:
