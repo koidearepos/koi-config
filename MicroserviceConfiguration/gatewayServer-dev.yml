@@ -4,28 +4,31 @@ eurakaPassword: 1234
 eurakaIP: localhost:8001/eureka/
 
 
-resilience4j.circuitbreaker:
-  configs:
-    default:
-      registerHealthIndicator: true
-      slidingWindowSize: 10
-      minimumNumberOfCalls: 5
-      permittedNumberOfCallsInHalfOpenState: 3
-      automaticTransitionFromOpenToHalfOpenEnabled: true
-      waitDurationInOpenState: 5s
-      failureRateThreshold: 50
-      eventConsumerBufferSize: 50
-  instances:
-    fallbackAuth:
-      baseConfig: default
-    fallbackUser:
-      baseConfig: default
-    fallbackEvent:
-      baseConfig: default
-    fallbackComment:
-      baseConfig: default
-    fallbackParticipant:
-      baseConfig: default
+resilience4j:
+  circuitbreaker:
+    configs:
+      defaultCircuitbreaker:
+        slidingWindowType: COUNT_BASED #Kayıt altına alınan data kıstası. Saniye olarakta belirlenebilmektedir.
+        slidingWindowSize: 5 #Son x datanın dikkate alınmasını sağlar.
+        minimumNumberOfCalls: 5 #Asgari kayıt sayısını belirler. Bu kayıt sayısından sonra algoritmalar çalışacaktır.
+        permittedNumberOfCallsInHalfOpenState: 2 #Sigora yarı açıkken yapılacak max kayıt sayısı.
+        automaticTransitionFromOpenToHalfOpenEnabled: true #Sigortanın açık konumdan yarı-açık konuma gelmesini üsrecinin atomatize edilmesi sağlar.
+        failureRateThreshold: 50 #% cinsinden ne kadar bir fail oranı olursa sigorta açık konuma gelecek bilgisi girilir.
+        waitDurationInOpenState: 60s #Açık olan devre saniye sonra yarı açık hal gelecektir.
+        slowCallDurationThreshold: 30s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
+        slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
+        registerHealthIndicator: true
+    instances:
+      fallbackAuth:
+        baseConfig: defaultCircuitbreaker
+      fallbackUser:
+        baseConfig: defaultCircuitbreaker
+      fallbackEvent:
+        baseConfig: defaultCircuitbreaker
+      fallbackComment:
+        baseConfig: defaultCircuitbreaker
+      fallbackParticipant:
+        baseConfig: defaultCircuitbreaker
   timelimiter:
     configs:
       defaultTimelimiter:
