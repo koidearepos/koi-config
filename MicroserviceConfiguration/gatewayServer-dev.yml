@@ -16,8 +16,6 @@ resilience4j:
         waitDurationInOpenState: 60s #Açık olan devre saniye sonra yarı açık hal gelecektir.
         slowCallDurationThreshold: 30s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
         slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
-        ringBufferSizeInHalfOpenState: 5
-        ringBufferSizeInClosedState: 5
         registerHealthIndicator: true
     instances:
       fallbackAuth:
