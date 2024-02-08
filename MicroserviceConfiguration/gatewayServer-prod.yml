@@ -3,14 +3,16 @@ eurakaUsername: grkem
 eurakaPassword: 1234
 eurakaIP: localhost:8001/eureka/
 
-
 server:
   port: 8002
 spring:
-  main:
-    web-application-type: reactive
   application:
     name: GATEWAY-SERVER
+  redis:
+    host: localhost
+    port: 6379
+  main:
+    web-application-type: reactive
   cloud:
     gateway:
       routes:
@@ -24,6 +26,10 @@ spring:
               args:
                 name: fallbackAuth
                 fallbackUri: forward:/fallbackAuthServer
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10 #Her saniye alınabilecek istek. Ornegin 10 sn sonra bu istek en fazla toplam 20 istek almıs olabilir
+                redis-rate-limiter.burstCapacity: 20 #Saniye'de alınabilecek maks istek. Yani yukarıda ki örnek gibi düşünürsek ilk saniye'de 20 istek alırsa diğer 19 saniye istek alamaz.
         - id: userDetailService
           uri: lb://USER-DETAIL
           predicates:
@@ -34,6 +40,10 @@ spring:
               args:
                 name: fallbackUser
                 fallbackUri: forward:/fallbackUserDetailService
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10 #Her saniye alınabilecek istek. Ornegin 10 sn sonra bu istek en fazla toplam 20 istek almıs olabilir
+                redis-rate-limiter.burstCapacity: 20 #Saniye'de alınabilecek maks istek. Yani yukarıda ki örnek gibi düşünürsek ilk saniye'de 20 istek alırsa diğer 19 saniye istek alamaz.            
         - id: eventService
           uri: lb://EVENT-SERVICE
           predicates:
@@ -44,6 +54,10 @@ spring:
               args:
                 name: fallbackEvent
                 fallbackUri: forward:/fallbackEventService
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10 #Her saniye alınabilecek istek. Ornegin 10 sn sonra bu istek en fazla toplam 20 istek almıs olabilir
+                redis-rate-limiter.burstCapacity: 20 #Saniye'de alınabilecek maks istek. Yani yukarıda ki örnek gibi düşünürsek ilk saniye'de 20 istek alırsa diğer 19 saniye istek alamaz.
         - id: commentService
           uri: lb://COMMENT-SERVICE
           predicates:
@@ -54,6 +68,10 @@ spring:
               args:
                 name: fallbackComment
                 fallbackUri: forward:/fallbackCommentService
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10 #Her saniye alınabilecek istek. Ornegin 10 sn sonra bu istek en fazla toplam 20 istek almıs olabilir
+                redis-rate-limiter.burstCapacity: 20 #Saniye'de alınabilecek maks istek. Yani yukarıda ki örnek gibi düşünürsek ilk saniye'de 20 istek alırsa diğer 19 saniye istek alamaz.
         - id: participantService
           uri: lb://PARTICIPANT-SERVICE
           predicates:
@@ -64,76 +82,51 @@ spring:
               args:
                 name: fallbackParticipant
                 fallbackUri: forward:/fallbackParticipantService
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10 #Her saniye alınabilecek istek. Ornegin 10 sn sonra bu istek en fazla toplam 20 istek almıs olabilir
+                redis-rate-limiter.burstCapacity: 20 #Saniye'de alınabilecek maks istek. Yani yukarıda ki örnek gibi düşünürsek ilk saniye'de 20 istek alırsa diğer 19 saniye istek alamaz.
 resilience4j:
   circuitbreaker:
+    configs:
+      defaultCircuitbreaker:
+        slidingWindowType: COUNT_BASED #Kayıt altına alınan data kıstası. Saniye olarakta belirlenebilmektedir.
+        slidingWindowSize: 10 #Son x datanın dikkate alınmasını sağlar.
+        minimumNumberOfCalls: 5 #Asgari kayıt sayısını belirler. Bu kayıt sayısından sonra algoritmalar çalışacaktır.
+        permittedNumberOfCallsInHalfOpenState: 2 #Sigora yarı açıkken yapılacak max kayıt sayısı.
+        automaticTransitionFromOpenToHalfOpenEnabled: true #Sigortanın açık konumdan yarı-açık konuma gelmesini üsrecinin atomatize edilmesi sağlar.
+        failureRateThreshold: 50 #% cinsinden ne kadar bir fail oranı olursa sigorta açık konuma gelecek bilgisi girilir.
+        waitDurationInOpenState: 60s #Açık olan devre saniye sonra yarı açık hal gelecektir.
+        slowCallDurationThreshold: 30s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
+        slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
+        registerHealthIndicator: true
     instances:
       fallbackAuth:
-        slidingWindowType: COUNT_BASED #Kayıt altına alınan data kıstası. Saniye olarakta belirlenebilmektedir.
-        slidingWindowSize: 100 #Son x datanın dikkate alınmasını sağlar.
-        minimumNumberOfCalls: 50 #Asgari kayıt sayısını belirler. Bu kayıt sayısından sonra algoritmalar çalışacaktır.
-        permittedNumberOfCallsInHalfOpenState: 20 #Sigora yarı açıkken yapılacak max kayıt sayısı.
-        automaticTransitionFromOpenToHalfOpenEnabled: true #Sigortanın açık konumdan yarı-açık konuma gelmesini üsrecinin atomatize edilmesi sağlar.
-        failureRateThreshold: 50 #% cinsinden ne kadar bir fail oranı olursa sigorta açık konuma gelecek bilgisi girilir.
-        waitDurationInOpenState: 10s #Açık olan devre saniye sonra yarı açık hal gelecektir.
-        slowCallDurationThreshold: 10s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
-        slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
-        registerHealthIndicator: true
+        baseConfig: defaultCircuitbreaker
       fallbackUser:
-        slidingWindowType: COUNT_BASED #Kayıt altına alınan data kıstası. Saniye olarakta belirlenebilmektedir.
-        slidingWindowSize: 100 #Son x datanın dikkate alınmasını sağlar.
-        minimumNumberOfCalls: 50 #Asgari kayıt sayısını belirler. Bu kayıt sayısından sonra algoritmalar çalışacaktır.
-        permittedNumberOfCallsInHalfOpenState: 20 #Sigora yarı açıkken yapılacak max kayıt sayısı.
-        automaticTransitionFromOpenToHalfOpenEnabled: true #Sigortanın açık konumdan yarı-açık konuma gelmesini üsrecinin atomatize edilmesi sağlar.
-        failureRateThreshold: 50 #% cinsinden ne kadar bir fail oranı olursa sigorta açık konuma gelecek bilgisi girilir.
-        waitDurationInOpenState: 10s #Açık olan devre saniye sonra yarı açık hal gelecektir.
-        slowCallDurationThreshold: 10s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
-        slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
-        registerHealthIndicator: true
+        baseConfig: defaultCircuitbreaker
       fallbackEvent:
-        slidingWindowType: COUNT_BASED #Kayıt altına alınan data kıstası. Saniye olarakta belirlenebilmektedir.
-        slidingWindowSize: 100 #Son x datanın dikkate alınmasını sağlar.
-        minimumNumberOfCalls: 50 #Asgari kayıt sayısını belirler. Bu kayıt sayısından sonra algoritmalar çalışacaktır.
-        permittedNumberOfCallsInHalfOpenState: 20 #Sigora yarı açıkken yapılacak max kayıt sayısı.
-        automaticTransitionFromOpenToHalfOpenEnabled: true #Sigortanın açık konumdan yarı-açık konuma gelmesini üsrecinin atomatize edilmesi sağlar.
-        failureRateThreshold: 50 #% cinsinden ne kadar bir fail oranı olursa sigorta açık konuma gelecek bilgisi girilir.
-        waitDurationInOpenState: 10s #Açık olan devre saniye sonra yarı açık hal gelecektir.
-        slowCallDurationThreshold: 10s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
-        slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
-        registerHealthIndicator: true
+        baseConfig: defaultCircuitbreaker
       fallbackComment:
-        slidingWindowType: COUNT_BASED #Kayıt altına alınan data kıstası. Saniye olarakta belirlenebilmektedir.
-        slidingWindowSize: 100 #Son x datanın dikkate alınmasını sağlar.
-        minimumNumberOfCalls: 50 #Asgari kayıt sayısını belirler. Bu kayıt sayısından sonra algoritmalar çalışacaktır.
-        permittedNumberOfCallsInHalfOpenState: 20 #Sigora yarı açıkken yapılacak max kayıt sayısı.
-        automaticTransitionFromOpenToHalfOpenEnabled: true #Sigortanın açık konumdan yarı-açık konuma gelmesini üsrecinin atomatize edilmesi sağlar.
-        failureRateThreshold: 50 #% cinsinden ne kadar bir fail oranı olursa sigorta açık konuma gelecek bilgisi girilir.
-        waitDurationInOpenState: 10s #Açık olan devre saniye sonra yarı açık hal gelecektir.
-        slowCallDurationThreshold: 10s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
-        slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
-        registerHealthIndicator: true
+        baseConfig: defaultCircuitbreaker
       fallbackParticipant:
-        slidingWindowType: COUNT_BASED #Kayıt altına alınan data kıstası. Saniye olarakta belirlenebilmektedir.
-        slidingWindowSize: 100 #Son x datanın dikkate alınmasını sağlar.
-        minimumNumberOfCalls: 50 #Asgari kayıt sayısını belirler. Bu kayıt sayısından sonra algoritmalar çalışacaktır.
-        permittedNumberOfCallsInHalfOpenState: 20 #Sigora yarı açıkken yapılacak max kayıt sayısı.
-        automaticTransitionFromOpenToHalfOpenEnabled: true #Sigortanın açık konumdan yarı-açık konuma gelmesini üsrecinin atomatize edilmesi sağlar.
-        failureRateThreshold: 50 #% cinsinden ne kadar bir fail oranı olursa sigorta açık konuma gelecek bilgisi girilir.
-        waitDurationInOpenState: 10s #Açık olan devre saniye sonra yarı açık hal gelecektir.
-        slowCallDurationThreshold: 10s #Saniye üzerinde dönen request'leri yavaş olarak kabul edecektir.
-        slowCallRateThreshold: 90 #Yavaş request sayısı %x'i aşarsa sigorta yarı-açık konuma gelecektir.
-        registerHealthIndicator: true
+        baseConfig: defaultCircuitbreaker
   timelimiter:
+    configs:
+      defaultTimelimiter:
+        timeoutDuration: 20s
     instances:
       fallbackAuth:
-        timeoutDuration: 20s #Request kaç saniye sonra time-out olacak bilgisi girilir. İlgili request time-out'tan sonra fallback'e düşecektir.
+        baseConfig: defaultTimelimiter
       fallbackUser:
-        timeoutDuration: 20s
+        baseConfig: defaultTimelimiter
       fallbackEvent:
-        timeoutDuration: 20s
+        baseConfig: defaultTimelimiter
       fallbackComment:
-        timeoutDuration: 20s
+        baseConfig: defaultTimelimiter
       fallbackParticipant:
-        timeoutDuration: 20s
+        baseConfig: defaultTimelimiter
+
 eureka:
   client:
     registerWithEureka: true
@@ -143,10 +136,19 @@ eureka:
       defaultZone: http://${eurakaUsername}:${eurakaPassword}@${eurakaIP}
     healthcheck:
       enabled: true
+      management:
 management:
   endpoints:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
     web:
       exposure:
         include: "*"
 logging:
   config: ${logbackURL}
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    io.github.resilience4j: DEBUG
