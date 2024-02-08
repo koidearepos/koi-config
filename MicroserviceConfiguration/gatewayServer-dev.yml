@@ -6,6 +6,9 @@ eurakaIP: localhost:8001/eureka/
 server:
   port: 8002
 spring:
+  redis:
+    host: localhost
+    port: 6382
   main:
     web-application-type: reactive
   application:
