@@ -10,7 +10,7 @@ spring:
     name: GATEWAY-SERVER
   redis:
     host: localhost
-    port: 6382
+    port: 6379
   main:
     web-application-type: reactive
   cloud:
@@ -28,9 +28,8 @@ spring:
                 fallbackUri: forward:/fallbackAuthServer
             - name: RequestRateLimiter
               args:
-                redis-rate-limiter.replenishRate: 2
-                redis-rate-limiter.burstCapacity: 1
-                redis-rate-limiter.requestedTokens: 1
+                redis-rate-limiter.replenishRate: 10 #Her saniye alınabilecek istek. Ornegin 10 sn sonra bu istek en fazla toplam 20 istek almıs olabilir
+                redis-rate-limiter.burstCapacity: 20 #Saniye'de alınabilecek maks istek. Yani yukarıda ki örnek gibi düşünürsek ilk saniye'de 20 istek alırsa diğer 19 saniye istek alamaz.
         - id: userDetailService
           uri: lb://USER-DETAIL
           predicates:
@@ -41,6 +40,10 @@ spring:
               args:
                 name: fallbackUser
                 fallbackUri: forward:/fallbackUserDetailService
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10 #Her saniye alınabilecek istek. Ornegin 10 sn sonra bu istek en fazla toplam 20 istek almıs olabilir
+                redis-rate-limiter.burstCapacity: 20 #Saniye'de alınabilecek maks istek. Yani yukarıda ki örnek gibi düşünürsek ilk saniye'de 20 istek alırsa diğer 19 saniye istek alamaz.            
         - id: eventService
           uri: lb://EVENT-SERVICE
           predicates:
@@ -51,6 +54,10 @@ spring:
               args:
                 name: fallbackEvent
                 fallbackUri: forward:/fallbackEventService
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10 #Her saniye alınabilecek istek. Ornegin 10 sn sonra bu istek en fazla toplam 20 istek almıs olabilir
+                redis-rate-limiter.burstCapacity: 20 #Saniye'de alınabilecek maks istek. Yani yukarıda ki örnek gibi düşünürsek ilk saniye'de 20 istek alırsa diğer 19 saniye istek alamaz.
         - id: commentService
           uri: lb://COMMENT-SERVICE
           predicates:
@@ -61,6 +68,10 @@ spring:
               args:
                 name: fallbackComment
                 fallbackUri: forward:/fallbackCommentService
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10 #Her saniye alınabilecek istek. Ornegin 10 sn sonra bu istek en fazla toplam 20 istek almıs olabilir
+                redis-rate-limiter.burstCapacity: 20 #Saniye'de alınabilecek maks istek. Yani yukarıda ki örnek gibi düşünürsek ilk saniye'de 20 istek alırsa diğer 19 saniye istek alamaz.
         - id: participantService
           uri: lb://PARTICIPANT-SERVICE
           predicates:
@@ -71,6 +82,10 @@ spring:
               args:
                 name: fallbackParticipant
                 fallbackUri: forward:/fallbackParticipantService
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10 #Her saniye alınabilecek istek. Ornegin 10 sn sonra bu istek en fazla toplam 20 istek almıs olabilir
+                redis-rate-limiter.burstCapacity: 20 #Saniye'de alınabilecek maks istek. Yani yukarıda ki örnek gibi düşünürsek ilk saniye'de 20 istek alırsa diğer 19 saniye istek alamaz.
 resilience4j:
   circuitbreaker:
     configs:
