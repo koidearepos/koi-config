@@ -6,13 +6,13 @@ eurakaIP: localhost:8001/eureka/
 server:
   port: 8002
 spring:
+  application:
+    name: GATEWAY-SERVER
   redis:
     host: localhost
     port: 6382
   main:
     web-application-type: reactive
-  application:
-    name: GATEWAY-SERVER
   cloud:
     gateway:
       routes:
