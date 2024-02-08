@@ -67,8 +67,8 @@ spring:
                 fallbackUri: forward:/fallbackAuthServer
             - name: RequestRateLimiter
               args:
-                redis-rate-limiter.replenishRate: 20
-                redis-rate-limiter.burstCapacity: 40
+                redis-rate-limiter.replenishRate: 2
+                redis-rate-limiter.burstCapacity: 1
                 redis-rate-limiter.requestedTokens: 1
         - id: userDetailService
           uri: lb://USER-DETAIL
